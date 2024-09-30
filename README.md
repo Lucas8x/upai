@@ -17,7 +17,7 @@
 **Client-Side Compression**: . <br/>
 **Zip Album Download**: . <br/>
 
-## Tecnologias
+## Tech
 
 - React
 - NextJS
@@ -34,4 +34,4 @@
 
 ## License
 
-[]()
+[MIT](./LICENSE)
