@@ -136,9 +136,3 @@ export const POST = auth(async (req): Promise<Response> => {
     );
   }
 });
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
