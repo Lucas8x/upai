@@ -27,11 +27,11 @@ async function deleteOutdatedPosts() {
           in: posts.map((post) => post.id),
         },
       },
-    }); */
+    });
 
     console.log(
       `Successfully deleted ${files.length} files and ${result.count} posts.`,
-    );
+    );*/
   } catch (error) {
     console.error('[DELETE-OUTDATED-POSTS] An error occurred:', error);
   }

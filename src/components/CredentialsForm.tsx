@@ -3,7 +3,7 @@
 import { signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import type { z } from 'zod';
 import {
   Form,
   FormControl,
@@ -45,19 +45,19 @@ export function CredentialsForm({ isSignUp }: Props) {
     try {
       const { username, password } = data;
 
-      const response: any = await signIn('credentials', {
+      const response = await signIn('credentials', {
         username,
         password,
         redirect: true,
         callbackUrl: '/',
       });
 
-      if (!response.ok) {
+      if (!response?.ok) {
         throw new Error('');
       }
 
       //toast({ title: 'Logado com sucesso.' });
-    } catch (error: any) {
+    } catch (error) {
       toast({
         title: 'Não foi possível logar. Tente novamente',
         //description: error.message,
@@ -65,7 +65,7 @@ export function CredentialsForm({ isSignUp }: Props) {
     }
   }
 
-  async function signUp(data: z.infer<typeof SignUpCredentialsFormSchema>) {
+  /* async function signUp(data: z.infer<typeof SignUpCredentialsFormSchema>) {
     try {
       const { username, password } = data;
 
@@ -92,14 +92,11 @@ export function CredentialsForm({ isSignUp }: Props) {
     } catch (error: any) {
       toast({ title: 'Falha ao cadastrar.', description: error.message });
     }
-  }
+  } */
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(isSignUp ? signUp : login)}
-        className='flex flex-col gap-1'
-      >
+      <form onSubmit={form.handleSubmit(login)} className='flex flex-col gap-1'>
         <FormField
           control={form.control}
           name='username'
