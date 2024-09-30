@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "migrate": "prisma migrate dev",
+    "prisma:migrate:dev": "prisma migrate dev",
     "studio": "prisma studio",
-    "build": "next build",
+    "prisma:migrate": "prisma migrate deploy",
+    "prisma:generate": "prisma generate",
+    "build": "next build && bun run prisma:migrate && bun run prisma:generate",
     "start": "next start"
   },
   "dependencies": {
