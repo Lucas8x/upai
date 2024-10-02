@@ -8,9 +8,8 @@
     "studio": "prisma studio",
     "prisma:migrate": "prisma migrate deploy",
     "prisma:generate": "prisma generate",
-    "build": "next build",
-    "start": "next start",
-    "vercel-build": " bun run prisma:migrate"
+    "build": "prisma generate && next build",
+    "start": "next start"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.4.1",
