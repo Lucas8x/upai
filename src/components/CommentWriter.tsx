@@ -2,8 +2,9 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import type { z } from 'zod';
 import { CommentSchema } from '@/lib/schemas';
+import { Spinner } from './icons/spinner';
 import { Textarea } from './ui/textarea';
 import { toast } from './ui/use-toast';
 import {
@@ -75,7 +76,7 @@ export function CommentWriter({ postID }: Props) {
             className='rounded bg-green-700 px-3 py-2 hover:bg-green-500'
             type='submit'
           >
-            Enviar
+            {form.formState.isSubmitting ? <Spinner /> : 'Enviar'}
           </button>
         </div>
       </form>
