@@ -29,7 +29,7 @@ export default async function Home({ searchParams }: SearchParamsProps) {
 
   return (
     <main className='flex h-full min-h-screen flex-col items-center gap-2 py-16 md:pb-8'>
-      <div className='flex w-full max-w-7xl flex-col justify-between gap-4 p-4 md:px-4 md:py-0 md:pb-8'>
+      <div className='flex h-full w-full max-w-7xl flex-col justify-between gap-4 p-4 md:px-4 md:py-0 md:pb-8'>
         <div
           className='flex flex-col gap-4 data-[no-posts=true]:h-full'
           data-no-posts={!hasPosts}
