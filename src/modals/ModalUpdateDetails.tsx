@@ -245,7 +245,7 @@ function ActionButtons(props: ActionButtonsProps) {
 
   return (
     <div className='flex w-full justify-between'>
-      <Button variant='outline' onClick={onClose}>
+      <Button variant='outline' onClick={onClose} disabled={pending}>
         Cancelar
       </Button>
       <Button type='submit' disabled={pending || disabled}>
