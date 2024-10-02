@@ -4,13 +4,13 @@ import Dropzone from 'react-dropzone';
 import { TbFileUpload, TbAlertTriangle } from 'react-icons/tb';
 import { type FormEvent, useState } from 'react';
 import imageCompression from 'browser-image-compression';
+import { useRouter } from 'next/navigation';
 
-import { FilePreview } from '@/components/FilePreview';
 import { ACCEPTED_IMAGE_TYPES, MAX_UPLOAD_FILE_SIZE } from '@/config';
+import { FilePreview } from '@/components/FilePreview';
 import { Label } from '../../components/ui/label';
 import { Input } from '../../components/ui/input';
 import { Textarea } from '../../components/ui/textarea';
-import { useRouter } from 'next/navigation';
 
 type ProgressPerFile = {
   [key: string]: number;
@@ -83,16 +83,18 @@ export default function UploadPageContent() {
       const result = await res.json();
 
       if (!res.ok) {
-        console.error('Upload failed');
+        console.error('[UPLOAD/SUBMIT] Not ok response', result.error);
         setStep('error');
-        setError(result.error);
+        setError(
+          Array.isArray(result.error) ? result.error.join('\n') : result.error,
+        );
         return;
       }
 
       setStep('success');
       router.push(`/post/${result.postId}`);
     } catch (error) {
-      console.error(error);
+      console.error('[UPLOAD/SUBMIT]', error);
       setStep('error');
     }
   }
@@ -105,8 +107,8 @@ export default function UploadPageContent() {
       >
         {error && (
           <div className='flex w-full items-center justify-center rounded bg-red-600 p-4'>
-            <TbAlertTriangle className='mr-4 size-14' />
-            <span>{error}</span>
+            <TbAlertTriangle className='mr-4 size-10' />
+            <span className='whitespace-pre-line'>{error}</span>
           </div>
         )}
 

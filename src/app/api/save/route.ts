@@ -54,7 +54,7 @@ export const POST = auth(async (req): Promise<Response> => {
   try {
     if (!req.auth || !req.auth.user || !req.auth.user.id) {
       return NextResponse.json(
-        { error: 'Usuário não autenticado' },
+        { error: 'Usuário não autenticado.' },
         { status: 401 },
       );
     }
@@ -69,10 +69,12 @@ export const POST = auth(async (req): Promise<Response> => {
     });
 
     if (!result.success) {
-      console.error(result.error.formErrors.fieldErrors);
-      return NextResponse.json(result.error.formErrors.fieldErrors, {
-        status: 400,
-      });
+      return NextResponse.json(
+        { error: Object.values(result.error.formErrors.fieldErrors).flat() },
+        {
+          status: 400,
+        },
+      );
     }
 
     const user = await prisma.user.findUnique({
@@ -83,7 +85,7 @@ export const POST = auth(async (req): Promise<Response> => {
 
     if (!user) {
       return NextResponse.json(
-        { error: 'Usuário não encontrado' },
+        { error: 'Usuário não encontrado.' },
         { status: 401 },
       );
     }
@@ -128,10 +130,10 @@ export const POST = auth(async (req): Promise<Response> => {
 
     return NextResponse.json({ ok: true, postId });
   } catch (err) {
-    console.error(err);
+    console.error('[API/SAVE] An error occurred:', err);
     //if (err instanceof BlobAccessError) {}
     return NextResponse.json(
-      { error: err instanceof Error ? err.message : 'Erro desconhecido' },
+      { error: err instanceof Error ? err.message : 'Erro desconhecido.' },
       { status: 500 },
     );
   }

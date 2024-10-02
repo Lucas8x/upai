@@ -8,19 +8,23 @@ export const filesSchema = z
       .instanceof(File)
       .refine(
         (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-        `Apenas imagens ${ACCEPTED_IMAGE_TYPES.join(', ').replace('image/', '')} são permitidos`,
+        `Apenas imagens ${ACCEPTED_IMAGE_TYPES.join(', ').replace('image/', '')} são permitidos.`,
       )
       .refine((file) => file.size <= MAX_UPLOAD_FILE_SIZE, {
-        message: `Os arquivo devem ter menos de ${MAX_UPLOAD_FILE_SIZE}MB`,
+        message: `Os arquivo devem ter menos de ${MAX_UPLOAD_FILE_SIZE}MB.`,
       }),
   )
-  .min(1, { message: 'Selecione pelo menos um arquivo' });
+  .min(1, { message: 'Selecione pelo menos um arquivo.' });
 
 export const postSchema = z.object({
   title: z
     .string()
-    .min(4, { message: 'O titulo deve ter pelo menos 4 caracteres' }),
-  description: z.string().optional(),
+    .min(4, { message: 'O titulo deve ter pelo menos 4 caracteres.' })
+    .max(75, { message: 'O titulo deve ter no máximo 75 caracteres.' }),
+  description: z
+    .string()
+    .max(300, { message: 'A descrição deve ter no máximo 300 caracteres.' })
+    .optional(),
   files: filesSchema,
 });
 
@@ -45,13 +49,13 @@ export const UserProfileDetailsSchema = z.object({
 export const LoginCredentialsFormSchema = z.object({
   username: z
     .string()
-    .min(3, { message: 'O nome de usuário deve ter pelo menos 3 caracteres' })
-    .max(20, { message: 'O nome de usuário deve ter no máximo 20 caracteres' })
+    .min(3, { message: 'O nome de usuário deve ter pelo menos 3 caracteres.' })
+    .max(20, { message: 'O nome de usuário deve ter no máximo 20 caracteres.' })
     .regex(/^[a-zA-Z0-9]+$/, {
-      message: 'O nome de usuário deve conter apenas letras e números',
+      message: 'O nome de usuário deve conter apenas letras e números.',
     }),
   password: z.string().min(6, {
-    message: 'A senha deve ter pelo menos 6 caracteres',
+    message: 'A senha deve ter pelo menos 6 caracteres.',
   }),
 });
 
