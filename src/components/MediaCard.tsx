@@ -36,7 +36,6 @@ export function MediaCard({
       <Link href={`/post/${postID}`}>
         <div
           className='group peer relative h-40 w-[300px] overflow-hidden rounded hover:rounded-none hover:rounded-t'
-          data-single-media={isSingleMedia}
           title={title}
         >
           {slides.map((f, index) => (
@@ -73,7 +72,7 @@ export function MediaCard({
                 animationDuration: `${slides.length}s`,
                 animationDelay: '0',
               }}
-            ></div>
+            />
           </div>
         )}
 

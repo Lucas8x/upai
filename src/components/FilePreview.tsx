@@ -10,7 +10,7 @@ function ProgressBar({ progress }: { progress: number }) {
         className='h-2 rounded bg-green-700 data-[inprogress=true]:animate-pulse'
         style={{ width: `${progress}%` }}
         data-inprogress={progress < 100}
-      ></div>
+      />
     </div>
   );
 }
@@ -27,7 +27,11 @@ function TextPreview(props: {
       <span className='truncate'>{props.file.name}</span>
 
       {!props.isProcessing && !props.isCompleted && props.progress < 100 && (
-        <button onClick={props.onRemove} title='Remover este arquivo'>
+        <button
+          onClick={props.onRemove}
+          title='Remover este arquivo'
+          type='button'
+        >
           <TbTrash size={24} />
         </button>
       )}

@@ -166,9 +166,8 @@ export default function UploadPageContent() {
             setFiles((s) => {
               if (s.length + acceptedFiles.length > 5) {
                 return s;
-              } else {
-                return [...s, ...acceptedFiles];
               }
+              return [...s, ...acceptedFiles];
             });
           }}
         >
